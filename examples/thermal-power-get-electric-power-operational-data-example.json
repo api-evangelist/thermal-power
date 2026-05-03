@@ -1,0 +1,64 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.eia.gov/v2/electricity/electric-power-operational-data/data",
+    "params": {
+      "api_key": "your-eia-api-key",
+      "frequency": "monthly",
+      "data[]": ["generation", "total-consumption", "heat-content"],
+      "facets[fueltypeid][]": "NG",
+      "facets[location][]": "TX",
+      "start": "2026-01",
+      "end": "2026-03",
+      "length": 100
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "response": {
+        "total": 3,
+        "dateFormat": "YYYY-MM",
+        "frequency": "monthly",
+        "data": [
+          {
+            "period": "2026-03",
+            "location": "TX",
+            "stateDescription": "Texas",
+            "sectorid": "98",
+            "sectorDescription": "All Sectors",
+            "fueltypeid": "NG",
+            "fuelTypeDescription": "Natural Gas",
+            "generation": 38542.1,
+            "total-consumption": 3410.5,
+            "heat-content": 3.42
+          },
+          {
+            "period": "2026-02",
+            "location": "TX",
+            "stateDescription": "Texas",
+            "sectorid": "98",
+            "sectorDescription": "All Sectors",
+            "fueltypeid": "NG",
+            "fuelTypeDescription": "Natural Gas",
+            "generation": 33187.4,
+            "total-consumption": 2985.2,
+            "heat-content": 2.99
+          },
+          {
+            "period": "2026-01",
+            "location": "TX",
+            "stateDescription": "Texas",
+            "sectorid": "98",
+            "sectorDescription": "All Sectors",
+            "fueltypeid": "NG",
+            "fuelTypeDescription": "Natural Gas",
+            "generation": 34901.8,
+            "total-consumption": 3105.7,
+            "heat-content": 3.12
+          }
+        ]
+      }
+    }
+  }
+}

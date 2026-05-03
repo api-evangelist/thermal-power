@@ -1,0 +1,125 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Thermal Power Monitoring"
+  description: "Workflow capability for monitoring thermal power generation assets including coal, natural gas, petroleum, and nuclear plants. Covers operational data, plant-level fuel metrics, generator capacity, and real-time RTO generation tracking."
+  tags:
+    - Energy
+    - Thermal Power
+    - Power Generation
+    - Electricity
+    - EIA
+    - Grid Monitoring
+    - Fuel Analytics
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      EIA_API_KEY: EIA_API_KEY
+
+capability:
+  consumes:
+    - import: thermal-power
+      location: ./shared/thermal-power-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: thermal-power-monitoring-api
+      description: "Unified REST API for thermal power generation monitoring and analytics."
+      resources:
+        - path: /v1/generation/by-fuel-type
+          name: generation-by-fuel-type
+          description: "State-level generation and fuel consumption by thermal fuel type."
+          operations:
+            - method: GET
+              name: get-generation-by-fuel-type
+              description: "Get electric power generation aggregated by fuel type and state."
+              call: "thermal-power.get-electric-power-operational-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/plants/operations
+          name: plant-operations
+          description: "Individual power plant fuel and generation metrics."
+          operations:
+            - method: GET
+              name: get-plant-operations
+              description: "Get plant-level generation, fuel consumption, heat content, and heat rate."
+              call: "thermal-power.get-facility-fuel-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/generators/capacity
+          name: generator-capacity
+          description: "Thermal generator capacity data."
+          operations:
+            - method: GET
+              name: get-generator-capacity
+              description: "Get nameplate and net capacity for thermal generating units."
+              call: "thermal-power.get-operating-generator-capacity"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/grid/hourly-generation
+          name: hourly-generation
+          description: "Hourly RTO/ISO generation by thermal fuel type."
+          operations:
+            - method: GET
+              name: get-hourly-generation
+              description: "Get hourly net generation by fuel type for grid regions."
+              call: "thermal-power.get-rto-fuel-type-data"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: thermal-power-monitoring-mcp
+      transport: http
+      description: "MCP server for AI-assisted thermal power generation monitoring and analytics."
+      tools:
+        - name: get-generation-by-fuel-type
+          description: "Get monthly or annual electric power generation by thermal fuel type (coal, natural gas, petroleum, nuclear) and US state."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "thermal-power.get-electric-power-operational-data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-plant-operations
+          description: "Get plant-level generation output, fuel consumption, heat content, and heat rate for individual thermal power plants."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "thermal-power.get-facility-fuel-data"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-generator-capacity
+          description: "Get nameplate and net capacity for individual thermal generators including prime mover type and energy source."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "thermal-power.get-operating-generator-capacity"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-rto-hourly-thermal-generation
+          description: "Get hourly net generation by thermal fuel type (coal, gas, oil, nuclear) for regional grid operators (MISO, PJM, CAISO, ERCOT, SPP, NYISO, ISONE)."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "thermal-power.get-rto-fuel-type-data"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,50 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.eia.gov/v2/electricity/facility-fuel/data",
+    "params": {
+      "api_key": "your-eia-api-key",
+      "frequency": "monthly",
+      "data[]": ["generation", "total-consumption", "heat-content", "heat-rate"],
+      "facets[fuel2002][]": "COL",
+      "facets[state][]": "WY",
+      "start": "2026-01",
+      "end": "2026-01",
+      "length": 10
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "response": {
+        "total": 4,
+        "data": [
+          {
+            "period": "2026-01",
+            "plantCode": "1974",
+            "plantName": "Dave Johnston",
+            "state": "WY",
+            "fuel2002": "COL",
+            "fuelTypeDescription": "Coal",
+            "generation": 412800,
+            "total-consumption": 198500,
+            "heat-content": 4217.2,
+            "heat-rate": 10212.4
+          },
+          {
+            "period": "2026-01",
+            "plantCode": "6137",
+            "plantName": "Jim Bridger",
+            "state": "WY",
+            "fuel2002": "COL",
+            "fuelTypeDescription": "Coal",
+            "generation": 889400,
+            "total-consumption": 432100,
+            "heat-content": 9125.8,
+            "heat-rate": 10260.1
+          }
+        ]
+      }
+    }
+  }
+}

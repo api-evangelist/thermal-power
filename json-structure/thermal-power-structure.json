@@ -1,0 +1,64 @@
+{
+  "name": "Thermal Power API Structure",
+  "description": "Structural documentation for thermal power generation data entities.",
+  "entities": [
+    {
+      "name": "ElectricPowerRecord",
+      "description": "Aggregated electric power operational data by state, sector, and fuel type.",
+      "fields": [
+        { "name": "period", "type": "string (YYYY-MM)", "required": false, "description": "Time period." },
+        { "name": "location", "type": "string", "required": false, "description": "US state abbreviation." },
+        { "name": "stateDescription", "type": "string", "required": false, "description": "State full name." },
+        { "name": "sectorid", "type": "string", "required": false, "description": "Sector identifier." },
+        { "name": "sectorDescription", "type": "string", "required": false, "description": "Sector description." },
+        { "name": "fueltypeid", "type": "string", "required": false, "description": "Fuel type code (COL, NG, PEL, NUC, ALL)." },
+        { "name": "fuelTypeDescription", "type": "string", "required": false, "description": "Fuel type description." },
+        { "name": "generation", "type": "number", "required": false, "description": "Net generation in thousand MWh." },
+        { "name": "total-consumption", "type": "number", "required": false, "description": "Total fuel consumption." },
+        { "name": "consumption-for-eg", "type": "number", "required": false, "description": "Fuel for electricity generation." },
+        { "name": "heat-content", "type": "number", "required": false, "description": "Heat content in trillion BTU." }
+      ]
+    },
+    {
+      "name": "FacilityFuelRecord",
+      "description": "Plant-level fuel and generation data.",
+      "fields": [
+        { "name": "period", "type": "string", "required": false, "description": "Time period." },
+        { "name": "plantCode", "type": "string", "required": false, "description": "EIA plant code." },
+        { "name": "plantName", "type": "string", "required": false, "description": "Plant name." },
+        { "name": "state", "type": "string", "required": false, "description": "State abbreviation." },
+        { "name": "fuel2002", "type": "string", "required": false, "description": "Fuel type code." },
+        { "name": "generation", "type": "number", "required": false, "description": "Net generation in MWh." },
+        { "name": "heat-content", "type": "number", "required": false, "description": "Heat content in MMBtu." },
+        { "name": "heat-rate", "type": "number", "required": false, "description": "Heat rate in BTU/kWh." }
+      ]
+    },
+    {
+      "name": "GeneratorCapacityRecord",
+      "description": "Individual generator capacity and technical characteristics.",
+      "fields": [
+        { "name": "period", "type": "string", "required": false, "description": "Time period." },
+        { "name": "plantCode", "type": "string", "required": false, "description": "EIA plant code." },
+        { "name": "generatorId", "type": "string", "required": false, "description": "Generator identifier." },
+        { "name": "stateid", "type": "string", "required": false, "description": "State abbreviation." },
+        { "name": "energy_source_code", "type": "string", "required": false, "description": "Energy source." },
+        { "name": "prime_mover_code", "type": "string", "required": false, "description": "Prime mover type." },
+        { "name": "nameplate-capacity-mw", "type": "number", "required": false, "description": "Nameplate capacity in MW." },
+        { "name": "net-summer-capacity-mw", "type": "number", "required": false, "description": "Net summer capacity in MW." },
+        { "name": "net-winter-capacity-mw", "type": "number", "required": false, "description": "Net winter capacity in MW." }
+      ]
+    },
+    {
+      "name": "RTOFuelTypeRecord",
+      "description": "Hourly RTO/ISO generation by fuel type.",
+      "fields": [
+        { "name": "period", "type": "string (YYYY-MM-DDTHH)", "required": false, "description": "Hourly datetime (UTC)." },
+        { "name": "respondent", "type": "string", "required": false, "description": "RTO/ISO identifier." },
+        { "name": "respondent-name", "type": "string", "required": false, "description": "RTO/ISO full name." },
+        { "name": "fueltype", "type": "string", "required": false, "description": "Fuel type code." },
+        { "name": "type-name", "type": "string", "required": false, "description": "Fuel type description." },
+        { "name": "value", "type": "number", "required": false, "description": "Net generation in MWh." }
+      ]
+    }
+  ]
+}

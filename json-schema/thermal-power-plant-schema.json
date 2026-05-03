@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/thermal-power/blob/main/json-schema/thermal-power-plant-schema.json",
+  "title": "Thermal Power Plant Record",
+  "description": "Operational data record for a thermal power generation facility, including generation output, fuel consumption, and heat rate metrics.",
+  "type": "object",
+  "properties": {
+    "period": {
+      "type": "string",
+      "description": "Time period of the record in YYYY-MM format.",
+      "pattern": "^\\d{4}(-\\d{2})?$"
+    },
+    "plantCode": {
+      "type": "string",
+      "description": "EIA plant identifier code."
+    },
+    "plantName": {
+      "type": "string",
+      "description": "Name of the power plant."
+    },
+    "state": {
+      "type": "string",
+      "description": "US state abbreviation where the plant is located.",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "fuel2002": {
+      "type": "string",
+      "description": "EIA fuel type code (e.g., NG for natural gas, COL for coal, DFO for distillate fuel oil, NUC for nuclear)."
+    },
+    "fuelTypeDescription": {
+      "type": "string",
+      "description": "Human-readable fuel type description."
+    },
+    "generation": {
+      "type": "number",
+      "description": "Net electricity generation in megawatthours (MWh).",
+      "minimum": 0
+    },
+    "totalConsumption": {
+      "type": "number",
+      "description": "Total fuel consumption in physical units.",
+      "minimum": 0
+    },
+    "heatContent": {
+      "type": "number",
+      "description": "Heat content of fuel consumed in million British Thermal Units (MMBtu).",
+      "minimum": 0
+    },
+    "heatRate": {
+      "type": "number",
+      "description": "Heat rate in BTU per net kWh generated. Lower values indicate higher efficiency.",
+      "minimum": 0
+    },
+    "capacityMW": {
+      "type": "number",
+      "description": "Nameplate generating capacity in megawatts (MW).",
+      "minimum": 0
+    },
+    "primeMover": {
+      "type": "string",
+      "description": "Prime mover type code.",
+      "enum": ["ST", "GT", "IC", "CA", "CS", "CT", "OT"]
+    },
+    "sectorId": {
+      "type": "string",
+      "description": "Sector identifier (1=Electric utility, 2=IPP non-CHP, 3=IPP CHP, 4=Commercial non-CHP, 5=Commercial CHP, 6=Industrial non-CHP, 7=Industrial CHP)."
+    }
+  }
+}

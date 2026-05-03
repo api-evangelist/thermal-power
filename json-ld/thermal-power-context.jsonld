@@ -1,0 +1,59 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "eia": "https://www.eia.gov/opendata/",
+    "energy": "https://dbpedia.org/ontology/",
+    "PowerPlant": {
+      "@id": "energy:PowerStation",
+      "@context": {
+        "plantCode": "https://schema.org/identifier",
+        "plantName": "https://schema.org/name",
+        "state": "https://schema.org/addressRegion",
+        "capacityMW": {
+          "@id": "energy:installedCapacity",
+          "@type": "https://schema.org/QuantitativeValue"
+        },
+        "generation": {
+          "@id": "energy:netElectricity",
+          "@type": "https://schema.org/QuantitativeValue"
+        },
+        "fuelType": {
+          "@id": "energy:usingFuel",
+          "@type": "@id"
+        },
+        "heatRate": {
+          "@id": "eia:heatRate",
+          "@type": "https://schema.org/QuantitativeValue"
+        },
+        "heatContent": {
+          "@id": "eia:heatContent",
+          "@type": "https://schema.org/QuantitativeValue"
+        },
+        "primeMover": {
+          "@id": "eia:primeMoverCode"
+        }
+      }
+    },
+    "ElectricPowerRecord": {
+      "@id": "eia:electricPowerOperationalData",
+      "@context": {
+        "period": "https://schema.org/temporal",
+        "location": "https://schema.org/addressRegion",
+        "fueltypeid": "energy:usingFuel",
+        "generation": "energy:netElectricity",
+        "sectorid": "eia:sectorId",
+        "sectorDescription": "https://schema.org/description"
+      }
+    },
+    "RTORecord": {
+      "@id": "eia:rtoFuelTypeData",
+      "@context": {
+        "period": "https://schema.org/temporal",
+        "respondent": "https://schema.org/identifier",
+        "respondent-name": "https://schema.org/name",
+        "fueltype": "energy:usingFuel",
+        "value": "energy:netElectricity"
+      }
+    }
+  }
+}
