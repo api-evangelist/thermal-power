@@ -1,125 +1,350 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Thermal Power Monitoring"
-  description: "Workflow capability for monitoring thermal power generation assets including coal, natural gas, petroleum, and nuclear plants. Covers operational data, plant-level fuel metrics, generator capacity, and real-time RTO generation tracking."
+  label: Thermal Power Monitoring
+  description: Workflow capability for monitoring thermal power generation assets including coal, natural gas, petroleum,
+    and nuclear plants. Covers operational data, plant-level fuel metrics, generator capacity, and real-time RTO generation
+    tracking.
   tags:
-    - Energy
-    - Thermal Power
-    - Power Generation
-    - Electricity
-    - EIA
-    - Grid Monitoring
-    - Fuel Analytics
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Energy
+  - Thermal Power
+  - Power Generation
+  - Electricity
+  - EIA
+  - Grid Monitoring
+  - Fuel Analytics
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      EIA_API_KEY: EIA_API_KEY
-
+- namespace: env
+  keys:
+    EIA_API_KEY: EIA_API_KEY
 capability:
   consumes:
-    - import: thermal-power
-      location: ./shared/thermal-power-api.yaml
-
+  - type: http
+    namespace: thermal-power
+    baseUri: https://api.eia.gov/v2
+    description: EIA Open Data API v2 for thermal power generation data.
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{EIA_API_KEY}}'
+      placement: query
+    resources:
+    - name: electric-power-operational-data
+      path: /electricity/electric-power-operational-data/data
+      description: Aggregated electric power operational data by state, sector, and fuel type.
+      operations:
+      - name: get-electric-power-operational-data
+        method: GET
+        description: Retrieve electric power generation and fuel consumption by fuel type and state.
+        inputParameters:
+        - name: frequency
+          in: query
+          type: string
+          required: false
+          description: Data frequency (monthly, quarterly, annual).
+        - name: data[]
+          in: query
+          type: string
+          required: false
+          description: Data columns to return.
+        - name: facets[fueltypeid][]
+          in: query
+          type: string
+          required: false
+          description: Fuel type filter (COL, NG, PEL, NUC, ALL).
+        - name: facets[location][]
+          in: query
+          type: string
+          required: false
+          description: State abbreviation filter.
+        - name: start
+          in: query
+          type: string
+          required: false
+          description: Start period YYYY-MM.
+        - name: end
+          in: query
+          type: string
+          required: false
+          description: End period YYYY-MM.
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset.
+        - name: length
+          in: query
+          type: integer
+          required: false
+          description: Records to return (max 5000).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: facility-fuel
+      path: /electricity/facility-fuel/data
+      description: Plant-level fuel consumption and generation data.
+      operations:
+      - name: get-facility-fuel-data
+        method: GET
+        description: Retrieve plant-level generation, fuel consumption, heat content, and heat rate.
+        inputParameters:
+        - name: frequency
+          in: query
+          type: string
+          required: false
+          description: Data frequency (monthly, annual).
+        - name: data[]
+          in: query
+          type: string
+          required: false
+          description: Data columns to return.
+        - name: facets[plantCode][]
+          in: query
+          type: string
+          required: false
+          description: EIA plant code filter.
+        - name: facets[fuel2002][]
+          in: query
+          type: string
+          required: false
+          description: Fuel type code filter.
+        - name: facets[state][]
+          in: query
+          type: string
+          required: false
+          description: State abbreviation filter.
+        - name: start
+          in: query
+          type: string
+          required: false
+          description: Start period YYYY-MM.
+        - name: end
+          in: query
+          type: string
+          required: false
+          description: End period YYYY-MM.
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset.
+        - name: length
+          in: query
+          type: integer
+          required: false
+          description: Records to return.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: generator-capacity
+      path: /electricity/operating-generator-capacity/data
+      description: Individual generator nameplate and net capacity data.
+      operations:
+      - name: get-operating-generator-capacity
+        method: GET
+        description: Retrieve generator capacity, prime mover type, and energy source for thermal generating units.
+        inputParameters:
+        - name: frequency
+          in: query
+          type: string
+          required: false
+          description: Data frequency (monthly, annual).
+        - name: data[]
+          in: query
+          type: string
+          required: false
+          description: Data columns to return.
+        - name: facets[energy_source_code][]
+          in: query
+          type: string
+          required: false
+          description: Energy source code filter.
+        - name: facets[prime_mover_code][]
+          in: query
+          type: string
+          required: false
+          description: Prime mover code filter (ST, GT, IC, CA, CS).
+        - name: facets[stateid][]
+          in: query
+          type: string
+          required: false
+          description: State abbreviation filter.
+        - name: start
+          in: query
+          type: string
+          required: false
+          description: Start period.
+        - name: end
+          in: query
+          type: string
+          required: false
+          description: End period.
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset.
+        - name: length
+          in: query
+          type: integer
+          required: false
+          description: Records to return.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rto-fuel-type
+      path: /electricity/rto/fuel-type-data/data
+      description: Hourly RTO/ISO generation by fuel type.
+      operations:
+      - name: get-rto-fuel-type-data
+        method: GET
+        description: Retrieve hourly net generation by fuel type for RTOs and ISOs.
+        inputParameters:
+        - name: frequency
+          in: query
+          type: string
+          required: false
+          description: Data frequency (hourly, local-hourly).
+        - name: data[]
+          in: query
+          type: string
+          required: false
+          description: Data columns to return.
+        - name: facets[respondent][]
+          in: query
+          type: string
+          required: false
+          description: RTO/ISO identifier (MISO, PJM, CAISO, ERCOT, SPP, NYISO, ISONE).
+        - name: facets[fueltype][]
+          in: query
+          type: string
+          required: false
+          description: Fuel type filter (NG, COL, OIL, NUC).
+        - name: start
+          in: query
+          type: string
+          required: false
+          description: Start datetime YYYY-MM-DDTHH.
+        - name: end
+          in: query
+          type: string
+          required: false
+          description: End datetime YYYY-MM-DDTHH.
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: Pagination offset.
+        - name: length
+          in: query
+          type: integer
+          required: false
+          description: Records to return.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: thermal-power-monitoring-api
-      description: "Unified REST API for thermal power generation monitoring and analytics."
-      resources:
-        - path: /v1/generation/by-fuel-type
-          name: generation-by-fuel-type
-          description: "State-level generation and fuel consumption by thermal fuel type."
-          operations:
-            - method: GET
-              name: get-generation-by-fuel-type
-              description: "Get electric power generation aggregated by fuel type and state."
-              call: "thermal-power.get-electric-power-operational-data"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/plants/operations
-          name: plant-operations
-          description: "Individual power plant fuel and generation metrics."
-          operations:
-            - method: GET
-              name: get-plant-operations
-              description: "Get plant-level generation, fuel consumption, heat content, and heat rate."
-              call: "thermal-power.get-facility-fuel-data"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/generators/capacity
-          name: generator-capacity
-          description: "Thermal generator capacity data."
-          operations:
-            - method: GET
-              name: get-generator-capacity
-              description: "Get nameplate and net capacity for thermal generating units."
-              call: "thermal-power.get-operating-generator-capacity"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/grid/hourly-generation
-          name: hourly-generation
-          description: "Hourly RTO/ISO generation by thermal fuel type."
-          operations:
-            - method: GET
-              name: get-hourly-generation
-              description: "Get hourly net generation by fuel type for grid regions."
-              call: "thermal-power.get-rto-fuel-type-data"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: thermal-power-monitoring-mcp
-      transport: http
-      description: "MCP server for AI-assisted thermal power generation monitoring and analytics."
-      tools:
-        - name: get-generation-by-fuel-type
-          description: "Get monthly or annual electric power generation by thermal fuel type (coal, natural gas, petroleum, nuclear) and US state."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "thermal-power.get-electric-power-operational-data"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-plant-operations
-          description: "Get plant-level generation output, fuel consumption, heat content, and heat rate for individual thermal power plants."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "thermal-power.get-facility-fuel-data"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-generator-capacity
-          description: "Get nameplate and net capacity for individual thermal generators including prime mover type and energy source."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "thermal-power.get-operating-generator-capacity"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-rto-hourly-thermal-generation
-          description: "Get hourly net generation by thermal fuel type (coal, gas, oil, nuclear) for regional grid operators (MISO, PJM, CAISO, ERCOT, SPP, NYISO, ISONE)."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "thermal-power.get-rto-fuel-type-data"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: thermal-power-monitoring-api
+    description: Unified REST API for thermal power generation monitoring and analytics.
+    resources:
+    - path: /v1/generation/by-fuel-type
+      name: generation-by-fuel-type
+      description: State-level generation and fuel consumption by thermal fuel type.
+      operations:
+      - method: GET
+        name: get-generation-by-fuel-type
+        description: Get electric power generation aggregated by fuel type and state.
+        call: thermal-power.get-electric-power-operational-data
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/plants/operations
+      name: plant-operations
+      description: Individual power plant fuel and generation metrics.
+      operations:
+      - method: GET
+        name: get-plant-operations
+        description: Get plant-level generation, fuel consumption, heat content, and heat rate.
+        call: thermal-power.get-facility-fuel-data
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/generators/capacity
+      name: generator-capacity
+      description: Thermal generator capacity data.
+      operations:
+      - method: GET
+        name: get-generator-capacity
+        description: Get nameplate and net capacity for thermal generating units.
+        call: thermal-power.get-operating-generator-capacity
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/grid/hourly-generation
+      name: hourly-generation
+      description: Hourly RTO/ISO generation by thermal fuel type.
+      operations:
+      - method: GET
+        name: get-hourly-generation
+        description: Get hourly net generation by fuel type for grid regions.
+        call: thermal-power.get-rto-fuel-type-data
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: thermal-power-monitoring-mcp
+    transport: http
+    description: MCP server for AI-assisted thermal power generation monitoring and analytics.
+    tools:
+    - name: get-generation-by-fuel-type
+      description: Get monthly or annual electric power generation by thermal fuel type (coal, natural gas, petroleum, nuclear)
+        and US state.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: thermal-power.get-electric-power-operational-data
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-plant-operations
+      description: Get plant-level generation output, fuel consumption, heat content, and heat rate for individual thermal
+        power plants.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: thermal-power.get-facility-fuel-data
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-generator-capacity
+      description: Get nameplate and net capacity for individual thermal generators including prime mover type and energy
+        source.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: thermal-power.get-operating-generator-capacity
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-rto-hourly-thermal-generation
+      description: Get hourly net generation by thermal fuel type (coal, gas, oil, nuclear) for regional grid operators (MISO,
+        PJM, CAISO, ERCOT, SPP, NYISO, ISONE).
+      hints:
+        readOnly: true
+        idempotent: true
+      call: thermal-power.get-rto-fuel-type-data
+      outputParameters:
+      - type: object
+        mapping: $.
