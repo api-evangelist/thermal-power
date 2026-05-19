@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Thermal Power API — Capacity
+  description: 'Thermal Power API — Capacity. 1 operations. Lead operation: Get Operating Generator Capacity. Self-contained
+    Naftiko capability covering one Thermal Power business surface.'
+  tags:
+  - Thermal Power
+  - Capacity
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THERMAL_POWER_API_KEY: THERMAL_POWER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: thermal-power-capacity
+    baseUri: https://api.eia.gov/v2
+    description: Thermal Power API — Capacity business capability. Self-contained, no shared references.
+    resources:
+    - name: electricity-operating-generator-capacity-data
+      path: /electricity/operating-generator-capacity/data
+      operations:
+      - name: getoperatinggeneratorcapacity
+        method: GET
+        description: Get Operating Generator Capacity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: EIA API key.
+          required: true
+        - name: frequency
+          in: query
+          type: string
+          description: Data frequency.
+        - name: data[]
+          in: query
+          type: string
+          description: Data columns (e.g., nameplate-capacity-mw, net-summer-capacity-mw, net-winter-capacity-mw, operating-year-month).
+        - name: facets[energy_source_code][]
+          in: query
+          type: string
+          description: Energy source code filter.
+        - name: facets[prime_mover_code][]
+          in: query
+          type: string
+          description: Prime mover code (e.g., ST for steam turbine, GT for gas turbine, IC for internal combustion, CA for
+            combined cycle).
+        - name: facets[stateid][]
+          in: query
+          type: string
+          description: State abbreviation filter.
+        - name: start
+          in: query
+          type: string
+          description: Start period in YYYY-MM format.
+        - name: end
+          in: query
+          type: string
+          description: End period in YYYY-MM format.
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset.
+        - name: length
+          in: query
+          type: integer
+          description: Number of records to return (max 5000).
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.THERMAL_POWER_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: thermal-power-capacity-rest
+    port: 8080
+    description: REST adapter for Thermal Power API — Capacity. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/electricity/operating-generator-capacity/data
+      name: electricity-operating-generator-capacity-data
+      description: REST surface for electricity-operating-generator-capacity-data.
+      operations:
+      - method: GET
+        name: getoperatinggeneratorcapacity
+        description: Get Operating Generator Capacity
+        call: thermal-power-capacity.getoperatinggeneratorcapacity
+        with:
+          api_key: rest.api_key
+          frequency: rest.frequency
+          data[]: rest.data[]
+          facets[energy_source_code][]: rest.facets[energy_source_code][]
+          facets[prime_mover_code][]: rest.facets[prime_mover_code][]
+          facets[stateid][]: rest.facets[stateid][]
+          start: rest.start
+          end: rest.end
+          offset: rest.offset
+          length: rest.length
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: thermal-power-capacity-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Thermal Power API — Capacity. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-operating-generator-capacity
+      description: Get Operating Generator Capacity
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: thermal-power-capacity.getoperatinggeneratorcapacity
+      with:
+        api_key: tools.api_key
+        frequency: tools.frequency
+        data[]: tools.data[]
+        facets[energy_source_code][]: tools.facets[energy_source_code][]
+        facets[prime_mover_code][]: tools.facets[prime_mover_code][]
+        facets[stateid][]: tools.facets[stateid][]
+        start: tools.start
+        end: tools.end
+        offset: tools.offset
+        length: tools.length
+      outputParameters:
+      - type: object
+        mapping: $.

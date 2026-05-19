@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Thermal Power API — Plant Operations
+  description: 'Thermal Power API — Plant Operations. 1 operations. Lead operation: Get Facility Fuel Data. Self-contained
+    Naftiko capability covering one Thermal Power business surface.'
+  tags:
+  - Thermal Power
+  - Plant Operations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THERMAL_POWER_API_KEY: THERMAL_POWER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: thermal-power-plant-operations
+    baseUri: https://api.eia.gov/v2
+    description: Thermal Power API — Plant Operations business capability. Self-contained, no shared references.
+    resources:
+    - name: electricity-facility-fuel-data
+      path: /electricity/facility-fuel/data
+      operations:
+      - name: getfacilityfueldata
+        method: GET
+        description: Get Facility Fuel Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key
+          in: query
+          type: string
+          description: EIA API key.
+          required: true
+        - name: frequency
+          in: query
+          type: string
+          description: Data frequency.
+        - name: data[]
+          in: query
+          type: string
+          description: Data columns (e.g., generation, total-consumption, consumption-for-eg, heat-content, heat-rate).
+        - name: facets[plantCode][]
+          in: query
+          type: string
+          description: EIA plant code identifier.
+        - name: facets[fuel2002][]
+          in: query
+          type: string
+          description: Fuel type code filter (e.g., NG, COL, DFO, NUC).
+        - name: facets[state][]
+          in: query
+          type: string
+          description: US state abbreviation.
+        - name: start
+          in: query
+          type: string
+          description: Start period in YYYY-MM format.
+        - name: end
+          in: query
+          type: string
+          description: End period in YYYY-MM format.
+        - name: offset
+          in: query
+          type: integer
+          description: Pagination offset.
+        - name: length
+          in: query
+          type: integer
+          description: Number of records to return (max 5000).
+    authentication:
+      type: apikey
+      key: api_key
+      value: '{{env.THERMAL_POWER_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: thermal-power-plant-operations-rest
+    port: 8080
+    description: REST adapter for Thermal Power API — Plant Operations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/electricity/facility-fuel/data
+      name: electricity-facility-fuel-data
+      description: REST surface for electricity-facility-fuel-data.
+      operations:
+      - method: GET
+        name: getfacilityfueldata
+        description: Get Facility Fuel Data
+        call: thermal-power-plant-operations.getfacilityfueldata
+        with:
+          api_key: rest.api_key
+          frequency: rest.frequency
+          data[]: rest.data[]
+          facets[plantCode][]: rest.facets[plantCode][]
+          facets[fuel2002][]: rest.facets[fuel2002][]
+          facets[state][]: rest.facets[state][]
+          start: rest.start
+          end: rest.end
+          offset: rest.offset
+          length: rest.length
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: thermal-power-plant-operations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Thermal Power API — Plant Operations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-facility-fuel-data
+      description: Get Facility Fuel Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: thermal-power-plant-operations.getfacilityfueldata
+      with:
+        api_key: tools.api_key
+        frequency: tools.frequency
+        data[]: tools.data[]
+        facets[plantCode][]: tools.facets[plantCode][]
+        facets[fuel2002][]: tools.facets[fuel2002][]
+        facets[state][]: tools.facets[state][]
+        start: tools.start
+        end: tools.end
+        offset: tools.offset
+        length: tools.length
+      outputParameters:
+      - type: object
+        mapping: $.
