@@ -1,0 +1,334 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thermal Power API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Power Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Electric Power Operational Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.eia.gov/v2/electricity/electric-power-operational-data/data",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "EIA API key."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Data frequency."
+              },
+              {
+                "name": "data[]",
+                "value": "",
+                "type": "query",
+                "description": "Data columns to return (e.g., generation, total-consumption, consumption-for-eg, heat-content)."
+              },
+              {
+                "name": "facets[fueltypeid][]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fuel type ID (e.g., COL for coal, NG for natural gas, PEL for petroleum, NUC for nuclear, ALL for all sources)."
+              },
+              {
+                "name": "facets[location][]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by US state abbreviation (e.g., TX, CA, NY)."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start period in YYYY-MM format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End period in YYYY-MM format."
+              },
+              {
+                "name": "sort[0][column]",
+                "value": "",
+                "type": "query",
+                "description": "Column to sort by."
+              },
+              {
+                "name": "sort[0][direction]",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 5000)."
+              }
+            ]
+          },
+          "docs": "Retrieves electric power operational data including generation, fuel consumption, and heat content by fuel type, sector, and state. Supports filtering by fuel type (coal, natural gas, petroleum, nuclear) for thermal generation analysis."
+        },
+        {
+          "info": {
+            "name": "Get RTO Fuel Type Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.eia.gov/v2/electricity/rto/fuel-type-data/data",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "EIA API key."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Data frequency."
+              },
+              {
+                "name": "data[]",
+                "value": "",
+                "type": "query",
+                "description": "Data columns (e.g., value for generation in MWh)."
+              },
+              {
+                "name": "facets[respondent][]",
+                "value": "",
+                "type": "query",
+                "description": "RTO/ISO identifier (e.g., MISO, PJM, CAISO, ERCOT, SPP, NYISO, ISONE)."
+              },
+              {
+                "name": "facets[fueltype][]",
+                "value": "",
+                "type": "query",
+                "description": "Fuel type filter (e.g., NG, COL, OIL, NUC, OTH)."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start datetime in YYYY-MM-DDTHH format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End datetime in YYYY-MM-DDTHH format."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 5000)."
+              }
+            ]
+          },
+          "docs": "Retrieves hourly net generation by fuel type for Regional Transmission Organizations (RTOs) and Independent System Operators (ISOs). Includes thermal generation from coal, natural gas, petroleum, and nuclear sources."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plant Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Facility Fuel Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.eia.gov/v2/electricity/facility-fuel/data",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "EIA API key."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Data frequency."
+              },
+              {
+                "name": "data[]",
+                "value": "",
+                "type": "query",
+                "description": "Data columns (e.g., generation, total-consumption, consumption-for-eg, heat-content, heat-rate)."
+              },
+              {
+                "name": "facets[plantCode][]",
+                "value": "",
+                "type": "query",
+                "description": "EIA plant code identifier."
+              },
+              {
+                "name": "facets[fuel2002][]",
+                "value": "",
+                "type": "query",
+                "description": "Fuel type code filter (e.g., NG, COL, DFO, NUC)."
+              },
+              {
+                "name": "facets[state][]",
+                "value": "",
+                "type": "query",
+                "description": "US state abbreviation."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start period in YYYY-MM format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End period in YYYY-MM format."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 5000)."
+              }
+            ]
+          },
+          "docs": "Retrieves annual and monthly electric power operational data for individual thermal power plants, including generation, fuel consumption, heat content, and heat rate by plant, state, and fuel type."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Capacity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Operating Generator Capacity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.eia.gov/v2/electricity/operating-generator-capacity/data",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "EIA API key."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Data frequency."
+              },
+              {
+                "name": "data[]",
+                "value": "",
+                "type": "query",
+                "description": "Data columns (e.g., nameplate-capacity-mw, net-summer-capacity-mw, net-winter-capacity-mw, operating-year-month)."
+              },
+              {
+                "name": "facets[energy_source_code][]",
+                "value": "",
+                "type": "query",
+                "description": "Energy source code filter."
+              },
+              {
+                "name": "facets[prime_mover_code][]",
+                "value": "",
+                "type": "query",
+                "description": "Prime mover code (e.g., ST for steam turbine, GT for gas turbine, IC for internal combustion, CA for combined cycle)."
+              },
+              {
+                "name": "facets[stateid][]",
+                "value": "",
+                "type": "query",
+                "description": "State abbreviation filter."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start period in YYYY-MM format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End period in YYYY-MM format."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 5000)."
+              }
+            ]
+          },
+          "docs": "Retrieves operating generator capacity data at the individual generator level, including nameplate capacity, net summer capacity, in-service date, prime mover type, and energy source for thermal generating units."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
