@@ -63,7 +63,7 @@ common:
     type: Documentation
   - name: EIA API Registration
     url: https://www.eia.gov/opendata/register.php
-    type: SignUp
+    type: Signup
   - name: EIA API Browser
     url: https://www.eia.gov/opendata/browser/
     type: Explorer
