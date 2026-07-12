@@ -55,6 +55,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/thermal-power-domain-security.yml
+  - type: Authentication
+    url: authentication/thermal-power-authentication.yml
   - name: EIA Open Data API
     url: https://www.eia.gov/opendata/
     type: Website

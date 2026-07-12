@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/thermal-power-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: api_key
+  description: EIA API key. Register for free at https://www.eia.gov/opendata/register.php
+  sources:
+  - openapi/thermal-power-openapi.yml
