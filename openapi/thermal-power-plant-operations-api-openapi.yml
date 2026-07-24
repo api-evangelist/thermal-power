@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Thermal Power Capacity Plant Operations API
+  description: The Thermal Power API provides access to thermal power generation data, plant-level operational metrics, fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, oil, and nuclear generation assets. Designed for grid operators, energy analysts, utilities, and industrial energy consumers who need programmatic access to thermal generation data.
+  version: 1.0.0
+  contact:
+    name: Thermal Power Data Services
+    url: https://www.eia.gov/developer/
+  license:
+    name: Public Domain
+    url: https://www.eia.gov/about/copyrights_reuse.php
+servers:
+- url: https://api.eia.gov/v2
+  description: EIA Open Data API v2
+security:
+- apiKey: []
+tags:
+- name: Plant Operations
+  description: Plant-level thermal generation operational data.
+paths:
+  /electricity/facility-fuel/data:
+    get:
+      operationId: getFacilityFuelData
+      summary: Get Facility Fuel Data
+      description: Retrieves annual and monthly electric power operational data for individual thermal power plants, including generation, fuel consumption, heat content, and heat rate by plant, state, and fuel type.
+      tags:
+      - Plant Operations
+      parameters:
+      - name: api_key
+        in: query
+        required: true
+        schema:
+          type: string
+        description: EIA API key.
+      - name: frequency
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - monthly
+          - annual
+          default: monthly
+        description: Data frequency.
+      - name: data[]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Data columns (e.g., generation, total-consumption, consumption-for-eg, heat-content, heat-rate).
+      - name: facets[plantCode][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: EIA plant code identifier.
+      - name: facets[fuel2002][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Fuel type code filter (e.g., NG, COL, DFO, NUC).
+      - name: facets[state][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: US state abbreviation.
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Start period in YYYY-MM format.
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: End period in YYYY-MM format.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+        description: Pagination offset.
+      - name: length
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5000
+        description: Number of records to return (max 5000).
+      responses:
+        '200':
+          description: Facility-level fuel and generation data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FacilityFuelDataResponse'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    FacilityFuelRecord:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Time period.
+        plantCode:
+          type: string
+          description: EIA plant code.
+        plantName:
+          type: string
+          description: Power plant name.
+        state:
+          type: string
+          description: State abbreviation.
+        fuel2002:
+          type: string
+          description: Fuel type code.
+        fuelTypeDescription:
+          type: string
+          description: Fuel type description.
+        generation:
+          type: number
+          description: Net generation in MWh.
+        total-consumption:
+          type: number
+          description: Total fuel consumption.
+        heat-content:
+          type: number
+          description: Heat content consumed (MMBtu).
+        heat-rate:
+          type: number
+          description: Heat rate (BTU per net kWh generated).
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message.
+    FacilityFuelDataResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/FacilityFuelRecord'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api_key
+      in: query
+      description: EIA API key. Register for free at https://www.eia.gov/opendata/register.php

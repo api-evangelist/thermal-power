@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Thermal Power Capacity API
+  description: The Thermal Power API provides access to thermal power generation data, plant-level operational metrics, fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, oil, and nuclear generation assets. Designed for grid operators, energy analysts, utilities, and industrial energy consumers who need programmatic access to thermal generation data.
+  version: 1.0.0
+  contact:
+    name: Thermal Power Data Services
+    url: https://www.eia.gov/developer/
+  license:
+    name: Public Domain
+    url: https://www.eia.gov/about/copyrights_reuse.php
+servers:
+- url: https://api.eia.gov/v2
+  description: EIA Open Data API v2
+security:
+- apiKey: []
+tags:
+- name: Capacity
+  description: Generating capacity and generator-level data.
+paths:
+  /electricity/operating-generator-capacity/data:
+    get:
+      operationId: getOperatingGeneratorCapacity
+      summary: Get Operating Generator Capacity
+      description: Retrieves operating generator capacity data at the individual generator level, including nameplate capacity, net summer capacity, in-service date, prime mover type, and energy source for thermal generating units.
+      tags:
+      - Capacity
+      parameters:
+      - name: api_key
+        in: query
+        required: true
+        schema:
+          type: string
+        description: EIA API key.
+      - name: frequency
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - monthly
+          - annual
+          default: monthly
+        description: Data frequency.
+      - name: data[]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Data columns (e.g., nameplate-capacity-mw, net-summer-capacity-mw, net-winter-capacity-mw, operating-year-month).
+      - name: facets[energy_source_code][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Energy source code filter.
+      - name: facets[prime_mover_code][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Prime mover code (e.g., ST for steam turbine, GT for gas turbine, IC for internal combustion, CA for combined cycle).
+      - name: facets[stateid][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: State abbreviation filter.
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Start period in YYYY-MM format.
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: End period in YYYY-MM format.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+        description: Pagination offset.
+      - name: length
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5000
+        description: Number of records to return (max 5000).
+      responses:
+        '200':
+          description: Generator capacity records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneratorCapacityResponse'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    GeneratorCapacityResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/GeneratorCapacityRecord'
+    GeneratorCapacityRecord:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Time period.
+        plantCode:
+          type: string
+          description: EIA plant code.
+        generatorId:
+          type: string
+          description: Generator identifier.
+        stateid:
+          type: string
+          description: State abbreviation.
+        energy_source_code:
+          type: string
+          description: Primary energy source code.
+        prime_mover_code:
+          type: string
+          description: Prime mover type (ST, GT, IC, CA, CS, etc.).
+        nameplate-capacity-mw:
+          type: number
+          description: Nameplate capacity in MW.
+        net-summer-capacity-mw:
+          type: number
+          description: Net summer capacity in MW.
+        net-winter-capacity-mw:
+          type: number
+          description: Net winter capacity in MW.
+        operating-year-month:
+          type: string
+          description: Month and year the generator went into service.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api_key
+      in: query
+      description: EIA API key. Register for free at https://www.eia.gov/opendata/register.php

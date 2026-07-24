@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: Thermal Power Capacity Power Operations API
+  description: The Thermal Power API provides access to thermal power generation data, plant-level operational metrics, fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, oil, and nuclear generation assets. Designed for grid operators, energy analysts, utilities, and industrial energy consumers who need programmatic access to thermal generation data.
+  version: 1.0.0
+  contact:
+    name: Thermal Power Data Services
+    url: https://www.eia.gov/developer/
+  license:
+    name: Public Domain
+    url: https://www.eia.gov/about/copyrights_reuse.php
+servers:
+- url: https://api.eia.gov/v2
+  description: EIA Open Data API v2
+security:
+- apiKey: []
+tags:
+- name: Power Operations
+  description: Electric power operational statistics by fuel type.
+paths:
+  /electricity/electric-power-operational-data/data:
+    get:
+      operationId: getElectricPowerOperationalData
+      summary: Get Electric Power Operational Data
+      description: Retrieves electric power operational data including generation, fuel consumption, and heat content by fuel type, sector, and state. Supports filtering by fuel type (coal, natural gas, petroleum, nuclear) for thermal generation analysis.
+      tags:
+      - Power Operations
+      parameters:
+      - name: api_key
+        in: query
+        required: true
+        schema:
+          type: string
+        description: EIA API key.
+      - name: frequency
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - monthly
+          - quarterly
+          - annual
+          default: monthly
+        description: Data frequency.
+      - name: data[]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Data columns to return (e.g., generation, total-consumption, consumption-for-eg, heat-content).
+      - name: facets[fueltypeid][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by fuel type ID (e.g., COL for coal, NG for natural gas, PEL for petroleum, NUC for nuclear, ALL for all sources).
+      - name: facets[location][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by US state abbreviation (e.g., TX, CA, NY).
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Start period in YYYY-MM format.
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: End period in YYYY-MM format.
+      - name: sort[0][column]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Column to sort by.
+      - name: sort[0][direction]
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        description: Sort direction.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+        description: Pagination offset.
+      - name: length
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5000
+        description: Number of records to return (max 5000).
+      responses:
+        '200':
+          description: Electric power operational data records.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ElectricPowerOperationalDataResponse'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /electricity/rto/fuel-type-data/data:
+    get:
+      operationId: getRTOFuelTypeData
+      summary: Get RTO Fuel Type Data
+      description: Retrieves hourly net generation by fuel type for Regional Transmission Organizations (RTOs) and Independent System Operators (ISOs). Includes thermal generation from coal, natural gas, petroleum, and nuclear sources.
+      tags:
+      - Power Operations
+      parameters:
+      - name: api_key
+        in: query
+        required: true
+        schema:
+          type: string
+        description: EIA API key.
+      - name: frequency
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - hourly
+          - local-hourly
+          default: hourly
+        description: Data frequency.
+      - name: data[]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Data columns (e.g., value for generation in MWh).
+      - name: facets[respondent][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: RTO/ISO identifier (e.g., MISO, PJM, CAISO, ERCOT, SPP, NYISO, ISONE).
+      - name: facets[fueltype][]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Fuel type filter (e.g., NG, COL, OIL, NUC, OTH).
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Start datetime in YYYY-MM-DDTHH format.
+      - name: end
+        in: query
+        required: false
+        schema:
+          type: string
+        description: End datetime in YYYY-MM-DDTHH format.
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+        description: Pagination offset.
+      - name: length
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 5000
+        description: Number of records to return (max 5000).
+      responses:
+        '200':
+          description: Hourly RTO fuel type generation data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RTOFuelTypeDataResponse'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Invalid API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ElectricPowerOperationalDataResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: Total number of matching records.
+            dateFormat:
+              type: string
+              description: Date format used in the response.
+            frequency:
+              type: string
+              description: Data frequency.
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/ElectricPowerRecord'
+            description:
+              type: string
+            series-description:
+              type: object
+    RTOFuelTypeDataResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/RTOFuelTypeRecord'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message.
+    ElectricPowerRecord:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Time period (e.g., 2026-03).
+        location:
+          type: string
+          description: US state abbreviation.
+        stateDescription:
+          type: string
+          description: State full name.
+        sectorid:
+          type: string
+          description: Sector identifier.
+        sectorDescription:
+          type: string
+          description: Sector description.
+        fueltypeid:
+          type: string
+          description: Fuel type identifier (COL, NG, PEL, NUC, ALL).
+        fuelTypeDescription:
+          type: string
+          description: Fuel type description.
+        generation:
+          type: number
+          description: Net generation in thousand megawatthours.
+        total-consumption:
+          type: number
+          description: Total fuel consumption in physical units.
+        consumption-for-eg:
+          type: number
+          description: Fuel consumption for electricity generation.
+        heat-content:
+          type: number
+          description: Heat content of fuel consumed (trillion BTU).
+    RTOFuelTypeRecord:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Datetime in YYYY-MM-DDTHH format (UTC).
+        respondent:
+          type: string
+          description: RTO/ISO identifier.
+        respondent-name:
+          type: string
+          description: RTO/ISO full name.
+        fueltype:
+          type: string
+          description: Fuel type code.
+        type-name:
+          type: string
+          description: Fuel type description.
+        value:
+          type: number
+          description: Net generation in MWh.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api_key
+      in: query
+      description: EIA API key. Register for free at https://www.eia.gov/opendata/register.php
