@@ -1,36 +1,72 @@
 aid: thermal-power
 url: https://raw.githubusercontent.com/api-evangelist/thermal-power/refs/heads/main/apis.yml
 apis:
-  - aid: thermal-power:thermal-power
-    name: Thermal Power API
-    tags:
-      - Energy
-      - Thermal Power
-      - Power Generation
-      - Electricity
-      - Fossil Fuels
-      - Nuclear
-    humanURL: https://www.eia.gov/opendata/
-    baseURL: https://api.eia.gov/v2
-    properties:
-      - url: https://www.eia.gov/opendata/documentation.php
-        type: Documentation
-      - url: openapi/thermal-power-openapi.yml
-        type: OpenAPI
-      - url: json-schema/thermal-power-plant-schema.json
-        type: JSONSchema
-      - url: json-ld/thermal-power-context.jsonld
-        type: JSONLD
-      - url: json-structure/thermal-power-structure.json
-        type: JSONStructure
-      - url: rules/thermal-power-rules.yml
-        type: SpectralRules
-      - url: vocabulary/thermal-power-vocabulary.yml
-        type: Vocabulary
-    description: >-
-      The Thermal Power API provides access to thermal power generation data including plant-level operational metrics,
-      fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, petroleum, and nuclear
-      generation assets. Data sourced from the U.S. Energy Information Administration (EIA) Open Data API.
+- aid: thermal-power:thermal-power-capacity-api
+  name: Thermal Power Capacity API
+  description: Generating capacity and generator-level data.
+  humanURL: https://www.eia.gov/opendata/
+  baseURL: https://api.eia.gov/v2
+  tags:
+  - Capacity
+  properties:
+  - type: OpenAPI
+    url: openapi/thermal-power-capacity-api-openapi.yml
+  - type: Documentation
+    url: https://www.eia.gov/opendata/documentation.php
+  - type: JSONSchema
+    url: json-schema/thermal-power-plant-schema.json
+  - type: JSONLD
+    url: json-ld/thermal-power-context.jsonld
+  - type: JSONStructure
+    url: json-structure/thermal-power-structure.json
+  - type: SpectralRules
+    url: rules/thermal-power-rules.yml
+  - type: Vocabulary
+    url: vocabulary/thermal-power-vocabulary.yml
+- aid: thermal-power:thermal-power-plant-operations-api
+  name: Thermal Power Plant Operations API
+  description: Plant-level thermal generation operational data.
+  humanURL: https://www.eia.gov/opendata/
+  baseURL: https://api.eia.gov/v2
+  tags:
+  - Plant Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/thermal-power-plant-operations-api-openapi.yml
+  - type: Documentation
+    url: https://www.eia.gov/opendata/documentation.php
+  - type: JSONSchema
+    url: json-schema/thermal-power-plant-schema.json
+  - type: JSONLD
+    url: json-ld/thermal-power-context.jsonld
+  - type: JSONStructure
+    url: json-structure/thermal-power-structure.json
+  - type: SpectralRules
+    url: rules/thermal-power-rules.yml
+  - type: Vocabulary
+    url: vocabulary/thermal-power-vocabulary.yml
+- aid: thermal-power:thermal-power-power-operations-api
+  name: Thermal Power Power Operations API
+  description: Electric power operational statistics by fuel type.
+  humanURL: https://www.eia.gov/opendata/
+  baseURL: https://api.eia.gov/v2
+  tags:
+  - Power Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/thermal-power-power-operations-api-openapi.yml
+  - type: Documentation
+    url: https://www.eia.gov/opendata/documentation.php
+  - type: JSONSchema
+    url: json-schema/thermal-power-plant-schema.json
+  - type: JSONLD
+    url: json-ld/thermal-power-context.jsonld
+  - type: JSONStructure
+    url: json-structure/thermal-power-structure.json
+  - type: SpectralRules
+    url: rules/thermal-power-rules.yml
+  - type: Vocabulary
+    url: vocabulary/thermal-power-vocabulary.yml
 name: Thermal Power
 tags:
   - Energy
@@ -41,7 +77,20 @@ tags:
   - Natural Gas
   - Nuclear
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/thermal-power.png
 access: 3rd-Party
 created: '2026-03-16'
 modified: '2026-05-19'
