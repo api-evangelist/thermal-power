@@ -1,0 +1,18 @@
+{
+  "provider": "thermal-power",
+  "sources": [
+    "thermal-power-capacity-api-openapi.yml",
+    "thermal-power-plant-operations-api-openapi.yml",
+    "thermal-power-power-operations-api-openapi.yml"
+  ],
+  "outputs": [
+    "thermal-power-capacity-api-openapi.yml",
+    "thermal-power-plant-operations-api-openapi.yml",
+    "thermal-power-power-operations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
