@@ -1,0 +1,393 @@
+{
+  "item": [
+    {
+      "id": "9878b758-65fb-4fa2-9886-7d5c279e091e",
+      "name": "Plant Operations",
+      "description": {
+        "content": "Plant-level thermal generation operational data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3a5d84d9-7375-45fd-b4f6-2efa204f2950",
+          "name": "Get Facility Fuel Data",
+          "request": {
+            "name": "Get Facility Fuel Data",
+            "description": {
+              "content": "Retrieves annual and monthly electric power operational data for individual thermal power plants, including generation, fuel consumption, heat content, and heat rate by plant, state, and fuel type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "electricity",
+                "facility-fuel",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) EIA API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "monthly",
+                  "description": "Data frequency."
+                },
+                {
+                  "disabled": false,
+                  "key": "data[]",
+                  "value": "<string>",
+                  "description": "Data columns (e.g., generation, total-consumption, consumption-for-eg, heat-content, heat-rate)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[plantCode][]",
+                  "value": "<string>",
+                  "description": "EIA plant code identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[fuel2002][]",
+                  "value": "<string>",
+                  "description": "Fuel type code filter (e.g., NG, COL, DFO, NUC)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[state][]",
+                  "value": "<string>",
+                  "description": "US state abbreviation."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Start period in YYYY-MM format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End period in YYYY-MM format."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "length",
+                  "value": "5000",
+                  "description": "Number of records to return (max 5000)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e77d985d-a8ed-4177-adc4-be0997b05fe2",
+              "name": "Facility-level fuel and generation data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "facility-fuel",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[plantCode][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fuel2002][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[state][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"total\": 6986,\n    \"data\": [\n      {\n        \"period\": \"string\",\n        \"plantCode\": \"string\",\n        \"plantName\": \"string\",\n        \"state\": \"string\",\n        \"fuel2002\": \"string\",\n        \"fuelTypeDescription\": \"string\",\n        \"generation\": 5370.308674280321,\n        \"total-consumption\": 70.73804938916739,\n        \"heat-content\": 7369.456197873476,\n        \"heat-rate\": 821.1552963742952\n      },\n      {\n        \"period\": \"string\",\n        \"plantCode\": \"string\",\n        \"plantName\": \"string\",\n        \"state\": \"string\",\n        \"fuel2002\": \"string\",\n        \"fuelTypeDescription\": \"string\",\n        \"generation\": 5870.627645794086,\n        \"total-consumption\": 2163.5550307715903,\n        \"heat-content\": 7193.27548349539,\n        \"heat-rate\": 3910.7074777581297\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a487953-db8e-457e-b2c7-5805b6eb73ad",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "facility-fuel",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[plantCode][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fuel2002][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[state][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a42e151-95af-470a-82bb-d25dbfe9d320",
+              "name": "Invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "facility-fuel",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[plantCode][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fuel2002][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[state][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.eia.gov/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd83193b-5cf9-4dda-a6e3-783ca39793de",
+    "name": "Thermal Power Capacity Plant Operations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Thermal Power API provides access to thermal power generation data, plant-level operational metrics, fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, oil, and nuclear generation assets. Designed for grid operators, energy analysts, utilities, and industrial energy consumers who need programmatic access to thermal generation data.\n\nContact Support:\n Name: Thermal Power Data Services",
+      "type": "text/plain"
+    }
+  }
+}

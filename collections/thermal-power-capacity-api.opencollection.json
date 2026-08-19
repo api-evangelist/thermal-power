@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Thermal Power Capacity API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Capacity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Operating Generator Capacity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.eia.gov/v2/electricity/operating-generator-capacity/data",
+            "params": [
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "EIA API key."
+              },
+              {
+                "name": "frequency",
+                "value": "",
+                "type": "query",
+                "description": "Data frequency."
+              },
+              {
+                "name": "data[]",
+                "value": "",
+                "type": "query",
+                "description": "Data columns (e.g., nameplate-capacity-mw, net-summer-capacity-mw, net-winter-capacity-mw, operating-year-month)."
+              },
+              {
+                "name": "facets[energy_source_code][]",
+                "value": "",
+                "type": "query",
+                "description": "Energy source code filter."
+              },
+              {
+                "name": "facets[prime_mover_code][]",
+                "value": "",
+                "type": "query",
+                "description": "Prime mover code (e.g., ST for steam turbine, GT for gas turbine, IC for internal combustion, CA for combined cycle)."
+              },
+              {
+                "name": "facets[stateid][]",
+                "value": "",
+                "type": "query",
+                "description": "State abbreviation filter."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start period in YYYY-MM format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End period in YYYY-MM format."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset."
+              },
+              {
+                "name": "length",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (max 5000)."
+              }
+            ]
+          },
+          "docs": "Retrieves operating generator capacity data at the individual generator level, including nameplate capacity, net summer capacity, in-service date, prime mover type, and energy source for thermal generating units."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

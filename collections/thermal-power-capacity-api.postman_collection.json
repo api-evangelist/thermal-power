@@ -1,0 +1,393 @@
+{
+  "item": [
+    {
+      "id": "f8241720-908d-46c8-91ee-d3b687c93d83",
+      "name": "Capacity",
+      "description": {
+        "content": "Generating capacity and generator-level data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d98645bc-2d78-4084-b0ba-20ef9649753b",
+          "name": "Get Operating Generator Capacity",
+          "request": {
+            "name": "Get Operating Generator Capacity",
+            "description": {
+              "content": "Retrieves operating generator capacity data at the individual generator level, including nameplate capacity, net summer capacity, in-service date, prime mover type, and energy source for thermal generating units.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "electricity",
+                "operating-generator-capacity",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) EIA API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "monthly",
+                  "description": "Data frequency."
+                },
+                {
+                  "disabled": false,
+                  "key": "data[]",
+                  "value": "<string>",
+                  "description": "Data columns (e.g., nameplate-capacity-mw, net-summer-capacity-mw, net-winter-capacity-mw, operating-year-month)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[energy_source_code][]",
+                  "value": "<string>",
+                  "description": "Energy source code filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[prime_mover_code][]",
+                  "value": "<string>",
+                  "description": "Prime mover code (e.g., ST for steam turbine, GT for gas turbine, IC for internal combustion, CA for combined cycle)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[stateid][]",
+                  "value": "<string>",
+                  "description": "State abbreviation filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Start period in YYYY-MM format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End period in YYYY-MM format."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "length",
+                  "value": "5000",
+                  "description": "Number of records to return (max 5000)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "723ecd85-1765-4ee4-b9eb-2fd20dce2825",
+              "name": "Generator capacity records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "operating-generator-capacity",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[energy_source_code][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[prime_mover_code][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[stateid][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"total\": 4399,\n    \"data\": [\n      {\n        \"period\": \"string\",\n        \"plantCode\": \"string\",\n        \"generatorId\": \"string\",\n        \"stateid\": \"string\",\n        \"energy_source_code\": \"string\",\n        \"prime_mover_code\": \"string\",\n        \"nameplate-capacity-mw\": 2154.2275230776786,\n        \"net-summer-capacity-mw\": 4534.523303011182,\n        \"net-winter-capacity-mw\": 1102.9112047708866,\n        \"operating-year-month\": \"string\"\n      },\n      {\n        \"period\": \"string\",\n        \"plantCode\": \"string\",\n        \"generatorId\": \"string\",\n        \"stateid\": \"string\",\n        \"energy_source_code\": \"string\",\n        \"prime_mover_code\": \"string\",\n        \"nameplate-capacity-mw\": 4308.684956500994,\n        \"net-summer-capacity-mw\": 2318.6600841825057,\n        \"net-winter-capacity-mw\": 7655.456304027226,\n        \"operating-year-month\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a932ac1-b346-4c76-857b-e0f94a74aadf",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "operating-generator-capacity",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[energy_source_code][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[prime_mover_code][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[stateid][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09f1374e-1fc6-443c-b609-8a57b8db48cf",
+              "name": "Invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "operating-generator-capacity",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[energy_source_code][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[prime_mover_code][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[stateid][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.eia.gov/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "05c8fd9e-eb8e-4f2e-ad72-1ddbacd5b6a3",
+    "name": "Thermal Power Capacity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Thermal Power API provides access to thermal power generation data, plant-level operational metrics, fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, oil, and nuclear generation assets. Designed for grid operators, energy analysts, utilities, and industrial energy consumers who need programmatic access to thermal generation data.\n\nContact Support:\n Name: Thermal Power Data Services",
+      "type": "text/plain"
+    }
+  }
+}

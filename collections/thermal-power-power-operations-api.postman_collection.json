@@ -1,0 +1,741 @@
+{
+  "item": [
+    {
+      "id": "ef503dca-c8d8-43ad-a93e-a8de035a958e",
+      "name": "Power Operations",
+      "description": {
+        "content": "Electric power operational statistics by fuel type.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42b6cf74-3d69-44a6-b0c7-e0b0d747050a",
+          "name": "Get Electric Power Operational Data",
+          "request": {
+            "name": "Get Electric Power Operational Data",
+            "description": {
+              "content": "Retrieves electric power operational data including generation, fuel consumption, and heat content by fuel type, sector, and state. Supports filtering by fuel type (coal, natural gas, petroleum, nuclear) for thermal generation analysis.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "electricity",
+                "electric-power-operational-data",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) EIA API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "monthly",
+                  "description": "Data frequency."
+                },
+                {
+                  "disabled": false,
+                  "key": "data[]",
+                  "value": "<string>",
+                  "description": "Data columns to return (e.g., generation, total-consumption, consumption-for-eg, heat-content)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[fueltypeid][]",
+                  "value": "<string>",
+                  "description": "Filter by fuel type ID (e.g., COL for coal, NG for natural gas, PEL for petroleum, NUC for nuclear, ALL for all sources)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[location][]",
+                  "value": "<string>",
+                  "description": "Filter by US state abbreviation (e.g., TX, CA, NY)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Start period in YYYY-MM format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End period in YYYY-MM format."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort[0][column]",
+                  "value": "<string>",
+                  "description": "Column to sort by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort[0][direction]",
+                  "value": "<string>",
+                  "description": "Sort direction."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "length",
+                  "value": "5000",
+                  "description": "Number of records to return (max 5000)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c426b9fa-9931-4228-a65c-945912d46b90",
+              "name": "Electric power operational data records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "electric-power-operational-data",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fueltypeid][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[location][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[0][column]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[0][direction]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"total\": 3460,\n    \"dateFormat\": \"string\",\n    \"frequency\": \"string\",\n    \"data\": [\n      {\n        \"period\": \"string\",\n        \"location\": \"string\",\n        \"stateDescription\": \"string\",\n        \"sectorid\": \"string\",\n        \"sectorDescription\": \"string\",\n        \"fueltypeid\": \"string\",\n        \"fuelTypeDescription\": \"string\",\n        \"generation\": 1320.056237977446,\n        \"total-consumption\": 3960.7928643031764,\n        \"consumption-for-eg\": 5379.906150718711,\n        \"heat-content\": 2806.4382832882416\n      },\n      {\n        \"period\": \"string\",\n        \"location\": \"string\",\n        \"stateDescription\": \"string\",\n        \"sectorid\": \"string\",\n        \"sectorDescription\": \"string\",\n        \"fueltypeid\": \"string\",\n        \"fuelTypeDescription\": \"string\",\n        \"generation\": 6651.3801532295065,\n        \"total-consumption\": 2732.063880839568,\n        \"consumption-for-eg\": 6395.04545168091,\n        \"heat-content\": 2123.1709337338257\n      }\n    ],\n    \"description\": \"string\",\n    \"series-description\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84bbcde6-54cc-440c-9dc7-b2414f5d2cec",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "electric-power-operational-data",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fueltypeid][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[location][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[0][column]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[0][direction]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c353bcfa-8aa7-4ab1-a7ee-fefa05823843",
+              "name": "Invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "electric-power-operational-data",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "monthly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fueltypeid][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[location][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[0][column]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort[0][direction]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6685500-e66e-4684-8aa0-1c975c8ee758",
+          "name": "Get RTO Fuel Type Data",
+          "request": {
+            "name": "Get RTO Fuel Type Data",
+            "description": {
+              "content": "Retrieves hourly net generation by fuel type for Regional Transmission Organizations (RTOs) and Independent System Operators (ISOs). Includes thermal generation from coal, natural gas, petroleum, and nuclear sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "electricity",
+                "rto",
+                "fuel-type-data",
+                "data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "(Required) EIA API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "frequency",
+                  "value": "hourly",
+                  "description": "Data frequency."
+                },
+                {
+                  "disabled": false,
+                  "key": "data[]",
+                  "value": "<string>",
+                  "description": "Data columns (e.g., value for generation in MWh)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[respondent][]",
+                  "value": "<string>",
+                  "description": "RTO/ISO identifier (e.g., MISO, PJM, CAISO, ERCOT, SPP, NYISO, ISONE)."
+                },
+                {
+                  "disabled": false,
+                  "key": "facets[fueltype][]",
+                  "value": "<string>",
+                  "description": "Fuel type filter (e.g., NG, COL, OIL, NUC, OTH)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "Start datetime in YYYY-MM-DDTHH format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "End datetime in YYYY-MM-DDTHH format."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "length",
+                  "value": "5000",
+                  "description": "Number of records to return (max 5000)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2aa7366-8440-4ac1-a940-daa51cfb9748",
+              "name": "Hourly RTO fuel type generation data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "rto",
+                    "fuel-type-data",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[respondent][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fueltype][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"total\": 6588,\n    \"data\": [\n      {\n        \"period\": \"string\",\n        \"respondent\": \"string\",\n        \"respondent-name\": \"string\",\n        \"fueltype\": \"string\",\n        \"type-name\": \"string\",\n        \"value\": 4229.035278233925\n      },\n      {\n        \"period\": \"string\",\n        \"respondent\": \"string\",\n        \"respondent-name\": \"string\",\n        \"fueltype\": \"string\",\n        \"type-name\": \"string\",\n        \"value\": 7808.314976203102\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50e4f5fa-ae39-47c3-9a94-46e2f4b045b9",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "rto",
+                    "fuel-type-data",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[respondent][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fueltype][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d03c1588-e6cd-4530-931e-fe1f2a148eff",
+              "name": "Invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "electricity",
+                    "rto",
+                    "fuel-type-data",
+                    "data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "frequency",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "data[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[respondent][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facets[fueltype][]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "length",
+                      "value": "5000"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.eia.gov/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff451527-ce15-49de-bdd5-7d512169b6c6",
+    "name": "Thermal Power Capacity Power Operations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Thermal Power API provides access to thermal power generation data, plant-level operational metrics, fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, oil, and nuclear generation assets. Designed for grid operators, energy analysts, utilities, and industrial energy consumers who need programmatic access to thermal generation data.\n\nContact Support:\n Name: Thermal Power Data Services",
+      "type": "text/plain"
+    }
+  }
+}
