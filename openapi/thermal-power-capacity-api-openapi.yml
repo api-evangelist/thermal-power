@@ -125,6 +125,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/GeneratorCapacityRecord'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message.
     GeneratorCapacityRecord:
       type: object
       properties:
@@ -158,12 +164,6 @@ components:
         operating-year-month:
           type: string
           description: Month and year the generator went into service.
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message.
   securitySchemes:
     apiKey:
       type: apiKey

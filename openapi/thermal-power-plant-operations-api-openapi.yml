@@ -113,6 +113,18 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    FacilityFuelDataResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/FacilityFuelRecord'
     FacilityFuelRecord:
       type: object
       properties:
@@ -146,18 +158,6 @@ components:
         heat-rate:
           type: number
           description: Heat rate (BTU per net kWh generated).
-    FacilityFuelDataResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          properties:
-            total:
-              type: integer
-            data:
-              type: array
-              items:
-                $ref: '#/components/schemas/FacilityFuelRecord'
     ErrorResponse:
       type: object
       properties:
