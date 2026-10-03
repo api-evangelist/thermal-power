@@ -233,6 +233,39 @@ components:
               type: string
             series-description:
               type: object
+    RTOFuelTypeDataResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/RTOFuelTypeRecord'
+    RTOFuelTypeRecord:
+      type: object
+      properties:
+        period:
+          type: string
+          description: Datetime in YYYY-MM-DDTHH format (UTC).
+        respondent:
+          type: string
+          description: RTO/ISO identifier.
+        respondent-name:
+          type: string
+          description: RTO/ISO full name.
+        fueltype:
+          type: string
+          description: Fuel type code.
+        type-name:
+          type: string
+          description: Fuel type description.
+        value:
+          type: number
+          description: Net generation in MWh.
     ElectricPowerRecord:
       type: object
       properties:
@@ -269,39 +302,6 @@ components:
         heat-content:
           type: number
           description: Heat content of fuel consumed (trillion BTU).
-    RTOFuelTypeRecord:
-      type: object
-      properties:
-        period:
-          type: string
-          description: Datetime in YYYY-MM-DDTHH format (UTC).
-        respondent:
-          type: string
-          description: RTO/ISO identifier.
-        respondent-name:
-          type: string
-          description: RTO/ISO full name.
-        fueltype:
-          type: string
-          description: Fuel type code.
-        type-name:
-          type: string
-          description: Fuel type description.
-        value:
-          type: number
-          description: Net generation in MWh.
-    RTOFuelTypeDataResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          properties:
-            total:
-              type: integer
-            data:
-              type: array
-              items:
-                $ref: '#/components/schemas/RTOFuelTypeRecord'
     ErrorResponse:
       type: object
       properties:

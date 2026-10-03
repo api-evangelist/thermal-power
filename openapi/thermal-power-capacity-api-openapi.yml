@@ -113,18 +113,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    GeneratorCapacityResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          properties:
-            total:
-              type: integer
-            data:
-              type: array
-              items:
-                $ref: '#/components/schemas/GeneratorCapacityRecord'
     ErrorResponse:
       type: object
       properties:
@@ -164,6 +152,18 @@ components:
         operating-year-month:
           type: string
           description: Month and year the generator went into service.
+    GeneratorCapacityResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/GeneratorCapacityRecord'
   securitySchemes:
     apiKey:
       type: apiKey
