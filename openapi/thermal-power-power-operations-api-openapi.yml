@@ -210,29 +210,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ElectricPowerOperationalDataResponse:
-      type: object
-      properties:
-        response:
-          type: object
-          properties:
-            total:
-              type: integer
-              description: Total number of matching records.
-            dateFormat:
-              type: string
-              description: Date format used in the response.
-            frequency:
-              type: string
-              description: Data frequency.
-            data:
-              type: array
-              items:
-                $ref: '#/components/schemas/ElectricPowerRecord'
-            description:
-              type: string
-            series-description:
-              type: object
     RTOFuelTypeDataResponse:
       type: object
       properties:
@@ -266,6 +243,35 @@ components:
         value:
           type: number
           description: Net generation in MWh.
+    ElectricPowerOperationalDataResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            total:
+              type: integer
+              description: Total number of matching records.
+            dateFormat:
+              type: string
+              description: Date format used in the response.
+            frequency:
+              type: string
+              description: Data frequency.
+            data:
+              type: array
+              items:
+                $ref: '#/components/schemas/ElectricPowerRecord'
+            description:
+              type: string
+            series-description:
+              type: object
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message.
     ElectricPowerRecord:
       type: object
       properties:
@@ -302,12 +308,6 @@ components:
         heat-content:
           type: number
           description: Heat content of fuel consumed (trillion BTU).
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message.
   securitySchemes:
     apiKey:
       type: apiKey

@@ -113,12 +113,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message.
     FacilityFuelRecord:
       type: object
       properties:
@@ -152,6 +146,12 @@ components:
         heat-rate:
           type: number
           description: Heat rate (BTU per net kWh generated).
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message.
     FacilityFuelDataResponse:
       type: object
       properties:
