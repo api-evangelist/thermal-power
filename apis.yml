@@ -117,6 +117,12 @@ maintainers:
   email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+- type: Plans
+  url: plans/thermal-power-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/thermal-power-rate-limits.yml
+- type: FinOps
+  url: finops/thermal-power-finops.yml
 - type: AgenticAccess
   url: agentic-access/thermal-power-agentic-access.yml
 - type: DomainSecurity
