@@ -1,4 +1,4 @@
-# Thermal Power (thermal-power)
+# Thermal Power
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,67 +66,156 @@
 
 Thermal power generation data APIs providing access to plant-level operational metrics, fuel consumption, heat rates, and generating capacity for coal, natural gas, petroleum, and nuclear power plants in the United States. Primary data source is the U.S. Energy Information Administration (EIA) Open Data API.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/thermal-power/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/thermal-power/refs/heads/main/apis.yml)
+**Areas:** Energy · Thermal Power · Power Generation · Electricity · Coal · Natural Gas · Nuclear
 
-## Scope
+## Thermal Power on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Thermal Power is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/thermal-power/](https://apis.io/providers/thermal-power/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (3)
 
-- Energy
-- Thermal Power
-- Power Generation
-- Electricity
-- Coal
-- Natural Gas
-- Nuclear
+- [Thermal Power Capacity API](https://apis.io/apis/thermal-power/thermal-power-capacity-api/) — Generating capacity and generator-level data.
+- [Thermal Power Plant Operations API](https://apis.io/apis/thermal-power/thermal-power-plant-operations-api/) — Plant-level thermal generation operational data.
+- [Thermal Power Operations API](https://apis.io/apis/thermal-power/thermal-power-power-operations-api/) — Electric power operational statistics by fuel type.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Thermal Power API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Thermal Power API provides access to thermal power generation data including plant-level operational metrics, fuel consumption, heat rate performance, and capacity utilization for coal, natural gas, petroleum, and nuclear generation assets. Data sourced from the U.S. Energy Information Administration (EIA) Open Data API.
+- [Thermal Power Agentic Access](https://apis.io/agentic-access/thermal-power/thermal-power-agentic-access/)
 
-- **Human URL:** [https://www.eia.gov/opendata/](https://www.eia.gov/opendata/)
-- **Base URL:** `https://api.eia.gov/v2`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Energy
-- Thermal Power
-- Power Generation
-- Electricity
-- Fossil Fuels
-- Nuclear
+- [Thermal Power Plant Record](https://apis.io/schemas/thermal-power/thermal-power-plant/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://www.eia.gov/opendata/documentation.php)
-- [OpenAPI](openapi/thermal-power-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/thermal-power.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/thermal-power.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/thermal-power-plant-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/thermal-power-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Structure](json-structure/thermal-power-structure.json)
-- [Spectral Rules](rules/thermal-power-rules.yml)
-- [Vocabulary](vocabulary/thermal-power-vocabulary.yml)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Thermal Power Structure](https://apis.io/json-structure/thermal-power/thermal-power-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Thermal Power Context](https://apis.io/jsonld/thermal-power/thermal-power-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Thermal Power Vocabulary](https://apis.io/vocabularies/thermal-power/thermal-power-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Thermal Power Get Electric Power Operational Data Example](https://apis.io/examples/thermal-power/thermal-power-get-electric-power-operational-data-example/)
+- [Thermal Power Get Facility Fuel Data Example](https://apis.io/examples/thermal-power/thermal-power-get-facility-fuel-data-example/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Thermal Power API](https://apis.io/collections/thermal-power/open-thermal-power/)
+- [Thermal Power Capacity API](https://apis.io/collections/thermal-power/open-thermal-power-capacity-api/)
+- [Thermal Power Capacity Plant Operations API](https://apis.io/collections/thermal-power/open-thermal-power-plant-operations-api/)
+- [Thermal Power Capacity Power Operations API](https://apis.io/collections/thermal-power/open-thermal-power-power-operations-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Thermal Power — jsonschema rules](https://apis.io/rules/thermal-power/thermal-power-jsonschema-spectral-rules/)
+- [Thermal Power API Rules](https://apis.io/rules/thermal-power/thermal-power-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Thermal Power Authentication](https://apis.io/security/thermal-power/thermal-power-authentication/)
+- [Thermal Power Domain Security](https://apis.io/security/thermal-power/thermal-power-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Thermal Power Plans Pricing](https://apis.io/plans/thermal-power/thermal-power-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Thermal Power Rate Limits](https://apis.io/rate-limits/thermal-power/thermal-power-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Thermal Power Finops](https://apis.io/finops/thermal-power/thermal-power-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.eia.gov/opendata/)
 - [Documentation](https://www.eia.gov/opendata/documentation.php)
-- [Sign Up](https://www.eia.gov/opendata/register.php)
-- [Explorer](https://www.eia.gov/opendata/browser/)
-- [Documentation](https://www.eia.gov/developer/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 32.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 57.3 |
+| Contract governance | 13.6 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 21.1 |
+
+**Agent readiness 27.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 13.9** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/thermal-power/](https://apis.io/providers/thermal-power/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Thermal Power: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/thermal-power/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
